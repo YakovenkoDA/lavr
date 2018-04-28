@@ -1,0 +1,30 @@
+version: '3'
+services:
+  php:
+      build:
+          context: docker/php
+          dockerfile: Dockerfile
+      working_dir: /var/www/lavr
+      environment:
+          - XDEBUG_REMOTE_PORT=9001
+          - XDEBUG_REMOTE_HOST=10.254.254.254
+      volumes:
+          - "./:/var/www/lavr"
+      networks:
+          - local
+      expose:
+          - 9000
+  nginx:
+      build:
+          context: docker/nginx
+          dockerfile: Dockerfile
+      working_dir: /var/www/lavr
+      volumes:
+             - "./:/var/www/lavr"
+      ports:
+          - "8080:80"
+          - "443:443"
+      depends_on:
+          - php
+networks:
+  local:
