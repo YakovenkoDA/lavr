@@ -1,30 +1,31 @@
-version: '3'
+version: '2'
+
 services:
-  php:
-      build:
-          context: docker/php
-          dockerfile: Dockerfile
-      working_dir: /var/www/lavr
-      environment:
-          - XDEBUG_REMOTE_PORT=9001
-          - XDEBUG_REMOTE_HOST=10.254.254.254
-      volumes:
-          - "./:/var/www/lavr"
-      networks:
-          - local
-      expose:
-          - 9000
-  nginx:
-      build:
-          context: docker/nginx
-          dockerfile: Dockerfile
-      working_dir: /var/www/lavr
-      volumes:
-             - "./:/var/www/lavr"
-      ports:
-          - "8080:80"
-          - "443:443"
-      depends_on:
-          - php
-networks:
-  local:
+  web:
+    build:
+      context: docker/nginx
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/var/www/lavr
+    ports:
+      - "8080:80"
+    links:
+      - app
+  app:
+    build:
+      context: docker/php
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/var/www/lavr
+    links:
+      - db
+    environment:
+      - DB_PORT=3306
+      - DB_HOST=db
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=lavrApp
+    ports:
+      - "33061:3306"

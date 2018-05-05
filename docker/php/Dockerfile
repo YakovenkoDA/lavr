@@ -1,7 +1,6 @@
-FROM php:7.1-fpm
+FROM php:7-fpm
 
-RUN apt-get update && apt-get install -y libmcrypt-dev \
-    mysql-client libmagickwand-dev --no-install-recommends \
-    && pecl install imagick \
-    && docker-php-ext-enable imagick \
-    && docker-php-ext-install mcrypt pdo_mysql
+RUN apt-get update && apt-get install -y libmcrypt-dev mysql-client \
+    && pecl install mcrypt-1.0.1 && docker-php-ext-enable mcrypt && docker-php-ext-install pdo_mysql
+
+WORKDIR /var/www/lavr
