@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
   web:
@@ -11,6 +11,8 @@ services:
       - "8080:80"
     links:
       - app
+    networks:
+      - local
   app:
     build:
       context: docker/php
@@ -22,10 +24,30 @@ services:
     environment:
       - DB_PORT=3306
       - DB_HOST=db
+    networks:
+      - local
   db:
     image: mysql:5.7
+    restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=secret
-      - MYSQL_DATABASE=lavrApp
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 123456
+      MYSQL_DATABASE: lavrApp
     ports:
-      - "33061:3306"
+      - "3306:3306"
+    networks:
+      - local
+  adminer:
+    image: adminer
+    restart: always
+    environment:
+      - DOMAIN_NAME=adminer.local
+    links:
+      - db
+    ports:
+      - "8088:8080"
+    networks:
+      - local
+networks:
+  local:
