@@ -16,6 +16,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -39,7 +40,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"
                            role="button" aria-expanded="false">Blog</a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Categories</a></li>
+                            <li><a href="{{route('admin.category.index')}}">Categories</a></li>
                             <li><a href="#">Data</a></li>
                         </ul>
                     </li>

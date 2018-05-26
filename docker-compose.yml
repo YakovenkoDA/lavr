@@ -22,8 +22,8 @@ services:
     links:
       - db
     environment:
-      - DB_PORT=3306
-      - DB_HOST=db
+      DB_PORT: 3306
+      DB_HOST: db
     networks:
       - local
   db:
@@ -42,7 +42,7 @@ services:
     image: adminer
     restart: always
     environment:
-      - DOMAIN_NAME=adminer.local
+      DOMAIN_NAME: adminer.local
     links:
       - db
     ports:
