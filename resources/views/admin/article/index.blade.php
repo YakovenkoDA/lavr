@@ -4,15 +4,15 @@
 
     <div class="container">
         @component('admin.blocks.breadcrumb')
-            @slot('title') Category List @endslot
+            @slot('title') Article List @endslot
             @slot('parent') Main @endslot
-            @slot('active') Categories @endslot
+            @slot('active') Articles @endslot
         @endcomponent
         <hr />
 
         <div class="pull-left">
-            <a href="{{route('admin.category.create')}}" class="btn btn-primary">
-                <i class="fa-fa-plus"></i> Create Category
+            <a href="{{route('admin.article.create')}}" class="btn btn-primary">
+                <i class="fa-fa-plus"></i> Create Article
             </a>
         </div>
         <table class="table table-striped">
@@ -22,16 +22,16 @@
             <th class="text-right">Action</th>
             </thead>
             <tbody>
-            @forelse($categoryList as $category)
+            @forelse($articleList as $article)
                 <tr>
-                    <td>{{$category->title}}</td>
-                    <td>{{$category->status}}</td>
+                    <td>{{$article->subject}}</td>
+                    <td>{{$article->status}}</td>
                     <td class="text-right">
-                        <form action="{{route('admin.category.destroy', $category)}}"
+                        <form action="{{route('admin.article.destroy', $article)}}"
                               onsubmit="return confirm('Are you sure?')" method="post">
                             <input type="hidden" name="_method" value="DELETE">
                             {{ csrf_field() }}
-                            <a class="btn btn-default" href="{{route('admin.category.edit', $category)}}"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-default" href="{{route('admin.article.edit', $article)}}"><i class="fa fa-edit"></i></a>
                             <button type="submit" class="btn"><i class="fa fa-trash-o"></i></button>
                         </form>
 
@@ -40,7 +40,7 @@
             @empty
                 <tr>
                     <td colspan="3" class="text-center">
-                        <h2>Category data is empty</h2>
+                        <h2>Article data is empty</h2>
                     </td>
                 </tr>
             @endforelse
@@ -49,7 +49,7 @@
             <tr>
                 <td colspan="3">
                     <ul class="pagination pull-right">
-                        {{$categoryList->links()}}
+                        {{$articleList->links()}}
                     </ul>
                 </td>
             </tr>

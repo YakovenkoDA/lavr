@@ -37,11 +37,12 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                     <li class="dropdown">
+                        <a class="navbar-brand" href="{{ route('admin.index') }}">Dashboard</a>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                           role="button" aria-expanded="false">Blog</a>
+                           role="button" aria-expanded="false">Menu</a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{route('admin.category.index')}}">Categories</a></li>
-                            <li><a href="#">Data</a></li>
+                            <li><a href="{{route('admin.article.index')}}">Articles</a></li>
                         </ul>
                     </li>
                 </ul>

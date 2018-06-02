@@ -2,16 +2,22 @@
 
 namespace App;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
-class Category extends Model
+class Article extends Model
 {
     protected $fillable = [
-        'title',
+        'subject',
         'hash',
-        'parent_id',
+        'description',
+        'text',
+        'image',
+        'show_image',
+        'meta_title',
+        'meta_description',
+        'meta_tags',
         'status',
         'created_by',
         'updated_by',
@@ -25,8 +31,11 @@ class Category extends Model
         );
     }
 
-    public function getChildren()
+    public function categories()
     {
-        return $this->hasMany(self::class, 'parent_id', 'id');
+        return $this->morphToMany(
+            'App\Category',
+            'model',
+            'category2models');
     }
 }
