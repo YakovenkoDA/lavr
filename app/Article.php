@@ -26,7 +26,7 @@ class Article extends Model
     public function setHashAttribute($value)
     {
         $this->attributes['hash'] = Str::slug(
-            mb_substr($this->title, 0, 40) .'-' . Carbon::now()->format('dmyHi'),
+            mb_substr($this->subject, 0, 40) .'-' . Carbon::now()->format('dmyHi'),
             '-'
         );
     }
@@ -37,5 +37,10 @@ class Article extends Model
             'App\Category',
             'model',
             'category2models');
+    }
+
+    public function scopeLastArticles($query, $count)
+    {
+        return $query->orderBy('created_at', 'desc')->take($count)->get();
     }
 }

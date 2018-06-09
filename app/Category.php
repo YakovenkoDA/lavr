@@ -29,4 +29,18 @@ class Category extends Model
     {
         return $this->hasMany(self::class, 'parent_id', 'id');
     }
+
+    public function getArticles()
+    {
+        return $this->morphedByMany(
+            'App\Article',
+            'model',
+            'category2models'
+        );
+    }
+
+    public function scopeLastCategories($query, $count)
+    {
+        return $query->orderBy('created_at', 'desc')->take($count)->get();
+    }
 }

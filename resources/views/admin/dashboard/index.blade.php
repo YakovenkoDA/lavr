@@ -5,12 +5,12 @@
         <div class="row">
             <div class="col-sm-3">
                 <div class="jumbotron">
-                    <p><span class="label label-primary">Categories 0</span></p>
+                    <p><span class="label label-primary">total Categories: {{ $categoryCount }}</span></p>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="jumbotron">
-                    <p><span class="label label-primary">Data 0</span></p>
+                    <p><span class="label label-primary">total Articles: {{ $articleCount }}</span></p>
                 </div>
             </div>
             <div class="col-sm-3">
@@ -28,17 +28,21 @@
         <div class="row">
             <div class="col-sm-6">
                 <a class="btn btn-block btn-primary" href="{{route('admin.category.create')}}">Create category</a>
-                <a class="list-group-item" href="#">
-                    <h4 class="list-group-item-heading">First category</h4>
-                    <p class="list-group-item-text">Data count</p>
+                @foreach($categories as $category)
+                <a class="list-group-item" href="{{ route('admin.category.edit', $category) }}">
+                    <h4 class="list-group-item-heading">{{ $category->title }}</h4>
+                    <p class="list-group-item-text">{{ $category->getArticles()->count() }}</p>
                 </a>
+                @endforeach
             </div>
             <div class="col-sm-6">
-                <a class="btn btn-block btn-primary" href="#">Create data</a>
-                <a class="list-group-item" href="#">
-                    <h4 class="list-group-item-heading">First data</h4>
-                    <p class="list-group-item-text">category</p>
-                </a>
+                <a class="btn btn-block btn-primary" href="{{route('admin.article.create')}}">Create data</a>
+                @foreach($articles as $article)
+                    <a class="list-group-item" href="{{ route('admin.article.edit', $article) }}">
+                        <h4 class="list-group-item-heading">{{ $article->subject }}</h4>
+                        <p class="list-group-item-text">{{ $article->categories()->pluck('title')->implode(', ')}}</p>
+                    </a>
+                @endforeach
             </div>
         </div>
     </div>

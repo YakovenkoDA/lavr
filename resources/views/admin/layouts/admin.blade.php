@@ -36,8 +36,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
+                    <li>
+                        <a href="{{ route('admin.index') }}">Dashboard</a>
+                    </li>
                     <li class="dropdown">
-                        <a class="navbar-brand" href="{{ route('admin.index') }}">Dashboard</a>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"
                            role="button" aria-expanded="false">Menu</a>
                         <ul class="dropdown-menu" role="menu">
