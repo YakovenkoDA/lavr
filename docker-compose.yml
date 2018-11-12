@@ -26,6 +26,24 @@ services:
       DB_HOST: db
     networks:
       - local
+  react:
+      build:
+        context: react-app
+        dockerfile: Dockerfile
+      environment:
+        - REACT_APP_PORT=3000
+      expose:
+        - 3000
+      volumes:
+        - ./react-app/src:/var/www/lavr/react-app/src
+        - ./react-app/public:/var/www/lavr/react-app/public
+      links:
+        - web
+      ports:
+        - "3000:3000"
+      command: npm run start
+      networks:
+        - local
   db:
     image: mysql:5.7
     restart: always
