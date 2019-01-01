@@ -27,7 +27,7 @@
 
         <div class="row">
             <div class="col-sm-6">
-                <a class="btn btn-block btn-primary" href="{{route('admin.category.create')}}">Create category</a>
+                <a class="btn btn-block btn-primary" href="{{route('admin.category.index')}}">Category</a>
                 @foreach($categories as $category)
                 <a class="list-group-item" href="{{ route('admin.category.edit', $category) }}">
                     <h4 class="list-group-item-heading">{{ $category->title }}</h4>
@@ -36,7 +36,7 @@
                 @endforeach
             </div>
             <div class="col-sm-6">
-                <a class="btn btn-block btn-primary" href="{{route('admin.article.create')}}">Create data</a>
+                <a class="btn btn-block btn-primary" href="{{route('admin.article.index')}}">Article</a>
                 @foreach($articles as $article)
                     <a class="list-group-item" href="{{ route('admin.article.edit', $article) }}">
                         <h4 class="list-group-item-heading">{{ $article->subject }}</h4>

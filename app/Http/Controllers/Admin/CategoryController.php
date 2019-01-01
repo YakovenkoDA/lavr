@@ -20,6 +20,24 @@ class CategoryController extends Controller
         ]);
     }
 
+    public function search()
+    {
+        $category = Category::query();
+        if (request('id')) {
+            $category->where('id', request('id', 0));
+        }
+        if (request('title')) {
+            $category->where('title', 'like', '%' . request('title') . '%');
+        }
+        if (is_numeric(request('status'))) {
+            $category->where('status', request('status', 0));
+        }
+
+        return view('admin.category.index', [
+            'categoryList' => $category->paginate(10),
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

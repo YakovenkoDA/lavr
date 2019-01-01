@@ -67,5 +67,16 @@ services:
       - "8088:8080"
     networks:
       - local
+#  laravel:
+#    build:
+#      context: docker/laravel
+#      dockerfile: Dockerfile
+#    volumes:
+#      - ./:/var/www/lavr
+#    links:
+#      - web
+#    command: php artisan migrate
+#    networks:
+#      - local
 networks:
   local:
